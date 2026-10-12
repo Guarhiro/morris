@@ -58,10 +58,6 @@ export default function App() {
     }
   }, [detailOpen]);
 
-  const go = id => {
-    setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
-  };
   const change = next => setSelected((next + products.length) % products.length);
   const closeDetail = () => { setDetailOpen(false); detailTriggerRef.current?.focus(); };
 
@@ -92,11 +88,11 @@ export default function App() {
 
             <h1 id="hero-title"><span>流行を、追わない。</span><span>自分を、纏う。</span></h1>
             <p className="hero-subline">その存在感は、誰のものでもない。</p>
-            <button className="text-link hero-link" onClick={() => go('collection')}>コレクションを見る <ArrowUpRight size={21} weight="light" /></button>
+            <a className="text-link hero-link" href="#collection">コレクションを見る <ArrowUpRight size={21} weight="light" /></a>
           </div>
           <div className="hero-footer">
             <span>INDIVIDUALITY, IN EVERY DETAIL.</span>
-            <button className="scroll-cue" onClick={() => go('collection')} aria-label="スクロールして帽子を見る"><span>SCROLL TO DISCOVER</span><ArrowDown className="scroll-arrow" size={23} weight="light" /></button>
+            <a className="scroll-cue" href="#collection" aria-label="スクロールして帽子を見る"><span>SCROLL TO DISCOVER</span><ArrowDown className="scroll-arrow" size={23} weight="light" /></a>
             <span className="hero-edition">THREE COLORS. ONE ATTITUDE.</span>
           </div>
         </section>
@@ -136,11 +132,11 @@ export default function App() {
             </div>
           </div>
           <div className="lineup" role="group" aria-label="コレクション一覧" data-reveal>
-            {products.map((p, i) => <button key={p.id} className={'lineup-item lineup-item--' + p.id + (selected === i ? ' is-selected' : '')} onClick={() => { setSelected(i); go('collection'); }} aria-label={p.jp + 'の紹介を見る'} aria-pressed={selected === i}>
+            {products.map((p, i) => <a href="#collection" key={p.id} className={'lineup-item lineup-item--' + p.id + (selected === i ? ' is-selected' : '')} onClick={() => setSelected(i)} aria-label={p.jp + 'の紹介を見る'} aria-current={selected === i ? 'true' : undefined}>
               <span className="lineup-number">{p.number}</span>
               <div className="lineup-photo"><img src={A + p.image} alt="" loading="lazy" /></div>
               <span className="lineup-label">{p.name}<ArrowUpRight size={19} weight="light" /></span>
-            </button>)}
+            </a>)}
           </div>
         </section>
 
